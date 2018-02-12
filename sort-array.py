@@ -1,7 +1,27 @@
 import sys
 
 def selectionSort(array):
-    print "selection sort here"
+    sort = []
+    used = []
+
+    i = 0
+
+    while i < len(array):
+        best = None
+        index = None
+
+        for j in range(len(array)):
+            if (j not in used):
+                if (best == None or best > int(array[j])):
+                    best = int(array[j])
+                    index = j
+        
+        used.append(index)
+        sort.append(best)
+
+        i += 1
+
+    return sort
 
 def mergeSort(array):
     print "merge sort here"
@@ -11,6 +31,7 @@ input = open(sys.argv[1], "r")
 arrayIn = []
 
 for line in input:
-    arrayIn.append(line)
-    
+    arrayIn.append(line[:-1])
+   
 print arrayIn
+print selectionSort(arrayIn)
