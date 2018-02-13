@@ -30,7 +30,9 @@ def angleMeasure(pt1, pt2, pt3):
     return math.degrees(math.acos((math.pow(side3, 2) - math.pow(side2, 2) - math.pow(side1, 2))/(-2.0*side1*side2)))
 
 def isPointBetweenLine(point, line1, line2):
-    if (angleMeasure(point, line1[1], line2[0]) + angleMeasure(point, line1[1], line2[1]) == angleMeasure(point, line2[0], line2[1])):
+    threshold = 2
+
+    if (angleMeasure(point, line1[1], line2[0]) + angleMeasure(point, line1[1], line2[1]) >= angleMeasure(point, line2[0], line2[1]) - threshold and angleMeasure(point, line1[1], line2[0]) + angleMeasure(point, line1[1], line2[1]) <= angleMeasure(point, line2[0], line2[1]) + threshold):
         return True
     else:
         return False
@@ -38,7 +40,8 @@ def isPointBetweenLine(point, line1, line2):
 def doLinesIntersect(line1, line2):
     if (line1 == line2):
         return False
-    if (isPointBetweenLine(line1[0], line1, line2) == True and isPointBetweenLine(line2[0], line2, line1)):
+
+    if (isPointBetweenLine(line1[0], line1, line2) == True and isPointBetweenLine(line2[0], line2, line1) == True):
         return True
     else:
         return False
@@ -46,6 +49,8 @@ def doLinesIntersect(line1, line2):
 input = open(sys.argv[1], "r")
 
 lines = []
+
+intersected = False
 
 # assumes input ends with newline
 for line in input:
@@ -63,4 +68,10 @@ for line1 in lines:
             line2 = Line(endpts[0], endpts[1])
 
             if (doLinesIntersect(line1, line2) == True):
-                print 'Line {0} intersects line {1}'.format(line1, line2)
+                intersected = True
+                print "{0} intersects {1}".format(line1, line2)
+                exit(0)
+
+if (intersected == False):
+    print "Lines do not intersect..."
+
