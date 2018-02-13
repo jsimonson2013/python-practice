@@ -1,23 +1,44 @@
 import sys
 import collections
+import math
 
 Line = collections.namedtuple('Line', ['endpt1', 'endpt2'])
 
-def areParallel(line1, line2):
-    return False
+# SSS law of Cosines to determine angle between lines pt1,p2 and pt1,p3
+def angleMeasure(pt1, pt2, pt3):
+    if (pt1 == pt2 or pt1 == pt3 or pt2 == pt3):
+        return 0
+    
+    pt1 = pt1.split(",")
+    pt2 = pt2.split(",")
+    pt3 = pt3.split(",")
 
-def directionFromPointToPoint(pt1, pt2):
-    # how to do this?
-    return -1
+    pt1[0] = float(pt1[0])
+    pt1[1] = float(pt1[1])
+    pt2[0] = float(pt2[0])
+    pt2[1] = float(pt2[1])
+    pt3[0] = float(pt3[0])
+    pt3[1] = float(pt3[1])
 
-def isPointBetweenLine(pt, line):
-    if (directionFromPointToPoint(pt, line[0]) != directionFromPointToPoint(pt, line[1] > 0)):
+    side1 = math.sqrt(math.pow((pt1[0] - pt2[0]), 2) + math.pow((pt1[1] - pt2[1]), 2))
+    side2 = math.sqrt(math.pow((pt1[0] - pt3[0]), 2) + math.pow((pt1[1] - pt3[1]), 2))
+    side3 = math.sqrt(math.pow((pt3[0] - pt2[0]), 2) + math.pow((pt3[1] - pt2[1]), 2))
+
+    if (2*side1*side2 == 0):
+        return 0
+
+    return math.degrees(math.acos((math.pow(side3, 2) - math.pow(side2, 2) - math.pow(side1, 2))/(-2.0*side1*side2)))
+
+def isPointBetweenLine(point, line1, line2):
+    if (angleMeasure(point, line1[1], line2[0]) + angleMeasure(point, line1[1], line2[1]) == angleMeasure(point, line2[0], line2[1])):
         return True
+    else:
+        return False
 
 def doLinesIntersect(line1, line2):
-    if (areParallel(line1, line2) == True):
+    if (line1 == line2):
         return False
-    if (isPointBetweenLine(line1[0], line2) == True and isPointBetweenLine(line2[0], line1)):
+    if (isPointBetweenLine(line1[0], line1, line2) == True and isPointBetweenLine(line2[0], line2, line1)):
         return True
     else:
         return False
