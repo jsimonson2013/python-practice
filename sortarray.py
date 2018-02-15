@@ -26,12 +26,13 @@ def selectionSort(array):
 def mergeSort(array):
     print "merge sort here"
 
-input = open(sys.argv[1], "r")
+if __name__ == "__main__":
+    input = open(sys.argv[1], "r")
 
-arrayIn = []
+    arrayIn = []
 
-for line in input:
-    arrayIn.append(line[:-1])
+    for line in input:
+        arrayIn.append(line[:-1])
    
-print arrayIn
-print selectionSort(arrayIn)
+    print arrayIn
+    print selectionSort(arrayIn)

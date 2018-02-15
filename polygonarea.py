@@ -12,12 +12,13 @@ def calculateArea(pts):
 
     return abs(area / 2.0)
 
-input = open(sys.argv[1], "r")
+if __name__ == "__main__":
+    input = open(sys.argv[1], "r")
 
-points = []
+    points = []
 
-# assumes input ends with newline
-for line in input:
-    points.append(line[:-1])
+    # assumes input ends with newline
+    for line in input:
+        points.append(line[:-1])
 
-print calculateArea(points)
+    print calculateArea(points)

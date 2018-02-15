@@ -46,32 +46,34 @@ def doLinesIntersect(line1, line2):
     else:
         return False
 
-input = open(sys.argv[1], "r")
+if __name__ == "__main__":
+    input = open(sys.argv[1], "r")
 
-lines = []
+    lines = []
 
-intersected = False
+    intersected = False
 
-# assumes input ends with newline
-for line in input:
-    lines.append(line[:-1])
+    # assumes input ends with newline
+    for line in input:
+        lines.append(line[:-1])
 
-for line1 in lines:
-    endpts = line1.split(' ')
-    line1 = Line(endpts[0], endpts[1])
+    for line1 in lines:
+        endpts = line1.split(' ')
+        print endpts[0]
+        line1 = Line(endpts[0], endpts[1])
 
-    for line2 in lines:
+        for line2 in lines:
 
-        # format lines and check if intersect
-        if (line1 != line2):
-            endpts = line2.split(' ')
-            line2 = Line(endpts[0], endpts[1])
+            # format lines and check if intersect
+            if (line1 != line2):
+                endpts = line2.split(' ')
+                line2 = Line(endpts[0], endpts[1])
 
-            if (doLinesIntersect(line1, line2) == True):
-                intersected = True
-                print "{0} intersects {1}".format(line1, line2)
-                exit(0)
+                if (doLinesIntersect(line1, line2) == True):
+                    intersected = True
+                    print "{0} intersects {1}".format(line1, line2)
+                    exit(0)
 
-if (intersected == False):
-    print "Lines do not intersect..."
+    if (intersected == False):
+        print "Lines do not intersect..."
 
