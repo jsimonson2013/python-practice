@@ -21,4 +21,4 @@ if __name__ == "__main__":
     for line in input:
         points.append(line[:-1])
 
-    print calculateArea(points)
+    print(calculateArea(points))

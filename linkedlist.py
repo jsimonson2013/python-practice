@@ -4,10 +4,10 @@ import node
 def toString(head):
     curr = head
     while curr.hasNext():
-        print curr.data
+        print(curr.data)
         curr = curr.nextNode
 
-    print curr.data
+    print(curr.data)
 
 if __name__ == "__main__":
     input = open(sys.argv[1], "r")

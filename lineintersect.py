@@ -59,7 +59,6 @@ if __name__ == "__main__":
 
     for line1 in lines:
         endpts = line1.split(' ')
-        print endpts[0]
         line1 = Line(endpts[0], endpts[1])
 
         for line2 in lines:
@@ -71,9 +70,9 @@ if __name__ == "__main__":
 
                 if (doLinesIntersect(line1, line2) == True):
                     intersected = True
-                    print "{0} intersects {1}".format(line1, line2)
+                    print("{0} intersects {1}".format(line1, line2))
                     exit(0)
 
     if (intersected == False):
-        print "Lines do not intersect..."
+        print("Lines do not intersect...")
 

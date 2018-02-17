@@ -24,7 +24,7 @@ def selectionSort(array):
     return sort
 
 def mergeSort(array):
-    print "merge sort here"
+    print("merge sort here")
 
 if __name__ == "__main__":
     input = open(sys.argv[1], "r")
@@ -34,5 +34,5 @@ if __name__ == "__main__":
     for line in input:
         arrayIn.append(line[:-1])
    
-    print arrayIn
-    print selectionSort(arrayIn)
+    print(arrayIn)
+    print(selectionSort(arrayIn))
