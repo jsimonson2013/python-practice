@@ -1,4 +1,5 @@
 import sys
+import math
 
 def selectionSort(array):
     sort = []
@@ -23,27 +24,39 @@ def selectionSort(array):
 
     return sort
 
-def recursivelyMergeAndSort(array1, array2):
+def mergeArrays(array1, array2):
+    sort = []
+    i = 0
+    j = 0
 
-    if (len(array1) < 2 or len(array2) < 2):
-        if int(array1[0]) < int(array2[0]):
-            return array1 + array2
+    while i < len(array1) and j < len(array2):
+        if int(array1[i]) < int(array2[j]):
+            sort.append(array1[i])
+            i += 1
         else:
-            return array2 + array1
-    else:
-        midptArray1 = int(len(array1)/2)
-        midptArray2 = int(len(array2)/2)
-        return recursivelyMergeAndSort(array1[:midptArray1], array1[midptArray1:]) + recursivelyMergeAndSort(array2[midptArray2:], array2[:midptArray2])
+            sort.append(array2[j])
+            j += 1
 
+    while i < len(array1):
+        sort.append(array1[i])
+        i += 1
+
+    while j < len(array2):
+        sort.append(array2[j])
+        j += 1
+
+    return sort
 
 
 def mergeSort(array):
-    sort = []
     if (len(array) < 2):
         return array
-
+    
     midpt = int(len(array)/2)
-    return recursivelyMergeAndSort(array[:midpt], array[midpt:])
+    left = mergeSort(array[:midpt])
+    right = mergeSort(array[midpt:])
+
+    return mergeArrays(left, right)
 
 if __name__ == "__main__":
     input = open(sys.argv[1], "r")
